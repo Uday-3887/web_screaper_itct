@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env
+.venv
+__pycache__
+*.pyc
+*.pyo
+browser_profile
+dashboard_data
+output
+google_maps_error.png
+*.xlsx
+*.csv.tmp
+*.log
