@@ -1,9 +1,0 @@
-.DS_Store
-.env
-.venv/
-__pycache__/
-*.pyc
-backend/browser_profile/
-backend/dashboard_data/
-backend/output/
-backend/google_maps_error.png

@@ -1,4 +1,0 @@
-# Add one Google Maps business query per line.
-clinics in Pune
-# restaurants in Nagpur
-
