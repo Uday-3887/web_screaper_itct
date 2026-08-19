@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Cloud dashboard for the ITCYBER Google Business and social profile scraper" />
+    <title>ITCYBER SCRAP — Cloud Dashboard</title>
+    <link rel="stylesheet" href="./styles.css?v=4.0.3" />
+  </head>
+  <body>
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div><strong>ITCYBER</strong><small>SCRAP ENGINE</small></div>
+        </div>
+
+        <nav class="nav" aria-label="Dashboard navigation">
+          <button class="nav-item active" data-view="dashboard"><span>⌂</span>Dashboard</button>
+          <button class="nav-item" data-view="jobs"><span>◫</span>Scraping jobs</button>
+          <button class="nav-item" data-view="data"><span>▤</span>Lead database</button>
+          <button class="nav-item" data-view="safety"><span>◈</span>Safety & limits</button>
+        </nav>
+
+        <div class="sidebar-status">
+          <div class="status-orb"><i></i></div>
+          <div><strong>Railway engine</strong><small id="sidebarEngineText">Checking backend…</small></div>
+        </div>
+        <p class="privacy-note">Direct dashboard access enabled. No login is required.</p>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <button class="icon-button menu-button" id="menuButton" aria-label="Open menu">☰</button>
+          <div class="page-heading"><p>LOCAL AUTOMATION WORKSPACE</p><h1 id="pageTitle">Scraper dashboard</h1></div>
+          <div class="topbar-actions">
+            <div class="engine-pill" id="enginePill"><i></i><span>Connecting</span></div>
+            <button class="icon-button" id="themeButton" aria-label="Change theme">☀</button>
+            <div class="user-menu-wrap">
+              <div class="user-button">
+                <span id="userInitials">AD</span>
+                <div><strong id="userName">Admin</strong><small>Direct access</small></div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="content">
+          <section class="view active" id="view-dashboard">
+            <div class="hero">
+              <div>
+                <div class="eyebrow"><span></span>NO API KEY REQUIRED</div>
+                <h2>Turn public business pages into<br /><em>structured cloud data.</em></h2>
+                <p>Search Google Maps, enrich records from official websites and public company profiles, then export clean Excel, CSV or JSON files.</p>
+              </div>
+              <div class="hero-visual" aria-hidden="true">
+                <div class="radar"><span></span><i></i><b></b></div>
+                <div class="floating-card card-one"><small>BUSINESSES</small><strong id="heroRecords">0</strong><span>records saved</span></div>
+                <div class="floating-card card-two"><small>ENGINE</small><strong>LOCAL</strong><span>private by default</span></div>
+              </div>
+            </div>
+
+            <div class="metric-grid">
+              <article class="metric-card"><div class="metric-icon violet">◫</div><div><span>Total jobs</span><strong id="metricJobs">0</strong><small id="metricJobsSub">No jobs yet</small></div></article>
+              <article class="metric-card"><div class="metric-icon cyan">✓</div><div><span>Completed</span><strong id="metricCompleted">0</strong><small>Available for download</small></div></article>
+              <article class="metric-card"><div class="metric-icon orange">◎</div><div><span>Running now</span><strong id="metricRunning">0</strong><small id="metricRunningSub">Engine is idle</small></div></article>
+              <article class="metric-card"><div class="metric-icon green">▤</div><div><span>Saved records</span><strong id="metricRecords">0</strong><small>Across dashboard jobs</small></div></article>
+            </div>
+
+            <div class="workspace-grid">
+              <section class="panel launch-panel">
+                <div class="panel-heading"><div><span class="panel-kicker">NEW EXTRACTION</span><h3>Configure scraping job</h3></div><div class="step-badge">01</div></div>
+                <form id="jobForm">
+                  <label class="field full"><span>Business category and location</span><div class="input-wrap"><b>⌕</b><input id="query" name="query" required maxlength="200" placeholder="e.g. restaurants in Nanded" autocomplete="off" /></div></label>
+                  <div class="presets" aria-label="Query examples">
+                    <button type="button" data-query="restaurants in Nanded">Restaurants · Nanded</button>
+                    <button type="button" data-query="clinics in Pune">Clinics · Pune</button>
+                    <button type="button" data-query="dentists in Nagpur">Dentists · Nagpur</button>
+                  </div>
+                  <div class="form-grid">
+                    <label class="field"><span>Maximum results (1–2000)</span><input id="maxResults" name="max_results" type="number" value="100" min="1" max="2000" step="1" /></label>
+                    <label class="field"><span>Enrichment mode</span><select id="enrichment" name="enrichment"><option value="none">Google only · Fast</option><option value="website" selected>Google + Website</option><option value="full">Google + Website + Social</option></select></label>
+                    <label class="field"><span>Output format</span><select id="format" name="format"><option value="xlsx" selected>Excel (.xlsx)</option><option value="csv">CSV (.csv)</option><option value="json">JSON (.json)</option></select></label>
+                    <label class="field"><span>Website pages / business</span><input id="websitePages" name="max_website_pages" type="number" value="2" min="1" max="8" /></label>
+                  </div>
+                  <div class="mode-note" id="modeNote"><span>ⓘ</span><p><strong>Balanced mode:</strong> collects Google details and checks a small number of official website contact pages.</p></div>
+                  <button class="primary-button" type="submit" id="startButton"><span>Start cloud scraping</span><b>→</b></button>
+                </form>
+              </section>
+
+              <section class="panel active-panel">
+                <div class="panel-heading"><div><span class="panel-kicker">LIVE ACTIVITY</span><h3>Current job</h3></div><div class="live-dot" id="liveDot"><i></i><span>Idle</span></div></div>
+                <div class="empty-state" id="emptyActive"><div class="empty-orbit"><span>⌁</span></div><h4>No active scrape</h4><p>Configure a job to see live Google discovery, extraction progress and checkpoint logs here.</p></div>
+                <div class="active-job hidden" id="activeJob">
+                  <div class="job-title-row"><div><small id="activeJobId">JOB</small><h4 id="activeQuery">—</h4></div><button class="danger-button" id="stopButton">Stop safely</button></div>
+                  <div class="progress-meta"><span id="progressStage">Starting</span><strong id="progressPercent">0%</strong></div>
+                  <div class="progress-track"><i id="progressBar"></i></div>
+                  <div class="progress-stats"><div><span>Discovered</span><strong id="progressDiscovered">0</strong></div><div><span>Processing</span><strong id="progressCurrent">0 / 0</strong></div><div><span>Saved</span><strong id="progressRecords">0</strong></div></div>
+                  <div class="console"><div class="console-head"><span><i></i><i></i><i></i></span><small>LIVE SCRAPER LOG</small></div><pre id="liveLogs">Waiting for output…</pre></div>
+                  <div class="job-actions"><button class="secondary-button" id="viewActiveData">Preview data</button><button class="primary-button compact" id="downloadActive">Download file</button></div>
+                </div>
+              </section>
+            </div>
+
+            <section class="panel recent-panel">
+              <div class="panel-heading"><div><span class="panel-kicker">RECENT ACTIVITY</span><h3>Latest jobs</h3></div><button class="text-button" data-view-link="jobs">View all jobs →</button></div>
+              <div class="table-wrap"><table><thead><tr><th>Query</th><th>Mode</th><th>Status</th><th>Records</th><th>Created</th><th></th></tr></thead><tbody id="recentJobsBody"></tbody></table></div>
+            </section>
+          </section>
+
+          <section class="view" id="view-jobs">
+            <div class="section-intro"><div><span class="panel-kicker">AUDIT TRAIL</span><h2>Scraping jobs</h2><p>Every job is stored on Railway with its configuration, progress, logs and output.</p></div><button class="primary-button compact" data-view-link="dashboard">+ New scrape</button></div>
+            <section class="panel">
+              <div class="toolbar"><div class="search-box">⌕<input id="jobSearch" placeholder="Search jobs…" /></div><select id="statusFilter"><option value="all">All statuses</option><option value="running">Running</option><option value="completed">Completed</option><option value="failed">Failed</option><option value="stopped">Stopped</option></select></div>
+              <div class="table-wrap"><table><thead><tr><th>Job / Query</th><th>Target</th><th>Enrichment</th><th>Status</th><th>Records</th><th>Started</th><th>Actions</th></tr></thead><tbody id="allJobsBody"></tbody></table></div>
+            </section>
+          </section>
+
+          <section class="view" id="view-data">
+            <div class="section-intro"><div><span class="panel-kicker">LOCAL DATASET</span><h2>Lead database preview</h2><p>Select a completed or checkpointed job to inspect the collected fields before downloading the full file.</p></div><button class="primary-button compact hidden" id="dataDownload">Download full file</button></div>
+            <section class="panel">
+              <div class="data-selector"><label><span>Selected job</span><select id="dataJobSelect"><option value="">Choose a job…</option></select></label><div class="search-box">⌕<input id="dataSearch" placeholder="Search current results…" /></div></div>
+              <div class="data-summary" id="dataSummary"><div><strong>0</strong><span>rows in file</span></div><p>No job selected</p></div>
+              <div class="table-wrap data-table"><table><thead id="dataHead"></thead><tbody id="dataBody"><tr><td class="empty-cell">Choose a job with saved output to preview its data.</td></tr></tbody></table></div>
+            </section>
+          </section>
+
+          <section class="view" id="view-safety">
+            <div class="section-intro"><div><span class="panel-kicker">RESPONSIBLE AUTOMATION</span><h2>Safety and technical limits</h2><p>This project collects only publicly displayed business information and intentionally avoids access-control bypasses.</p></div></div>
+            <div class="safety-grid">
+              <article class="panel safety-card"><span class="safety-icon green">✓</span><h3>Designed to do</h3><ul><li>Collect visible Google Business fields</li><li>Respect website robots.txt rules</li><li>Scan public company/contact pages</li><li>Checkpoint results after each listing</li><li>Keep job history on persistent storage</li></ul></article>
+              <article class="panel safety-card"><span class="safety-icon orange">!</span><h3>Will not do</h3><ul><li>Bypass CAPTCHA, login or rate limits</li><li>Scrape private personal profiles</li><li>Guarantee unpublished email or phone data</li><li>Use hidden API keys or paid providers</li><li>Run several browser jobs at the same time</li></ul></article>
+              <article class="panel safety-card wide"><span class="safety-icon violet">◎</span><div><h3>Recommended workflow</h3><p>Start with 5 results in Google-only mode. When that succeeds, test Website mode. Use Full mode only for smaller batches because public social pages are slower and may require login.</p><div class="workflow-steps"><span><b>1</b>Google test</span><i>→</i><span><b>2</b>Website enrich</span><i>→</i><span><b>3</b>Full social run</span></div></div></article>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <div class="toast" id="toast" role="status"><span id="toastIcon">✓</span><p id="toastText">Ready</p></div>
+    <script src="./config.js?v=4.0.3"></script>
+    <script src="./app.js?v=4.0.3"></script>
+  </body>
+</html>

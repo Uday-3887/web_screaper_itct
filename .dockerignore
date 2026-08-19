@@ -1,0 +1,14 @@
+.git
+.gitignore
+frontend
+**/.venv
+**/__pycache__
+**/*.pyc
+**/*.pyo
+backend/browser_profile
+backend/dashboard_data
+backend/output
+backend/google_maps_error.png
+backend/*.xlsx
+backend/*.csv.tmp
+backend/*.log
